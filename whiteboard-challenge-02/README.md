@@ -8,4 +8,4 @@ To access solution.test.js with cli:
 
 Problem domain: Data analysis, validation, and unit testing
 
-![alt text](./whiteboard-02.jpg)
+![alt text](whiteboard-02.jpg)
