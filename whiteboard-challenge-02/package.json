@@ -1,0 +1,14 @@
+{
+  "name": "whiteboard-challenge-02",
+  "version": "1.0.0",
+  "description": "analyse array and test",
+  "main": "solution.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Ender",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^22.1.1"
+  }
+}
