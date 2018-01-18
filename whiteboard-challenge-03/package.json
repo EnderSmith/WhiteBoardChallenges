@@ -1,0 +1,14 @@
+{
+  "name": "whiteboard-challenge-03",
+  "version": "1.0.0",
+  "description": "Traversing a train problem",
+  "main": "solution.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "EnderSmith",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^22.1.2"
+  }
+}
