@@ -1,0 +1,14 @@
+{
+  "name": "whiteboard-challenge-04",
+  "version": "1.0.0",
+  "description": "merging arrays",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "EnderSmith",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^22.1.3"
+  }
+}
