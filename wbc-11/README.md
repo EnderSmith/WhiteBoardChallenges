@@ -22,3 +22,23 @@ _You have an integer array which contains numbers from 1 to 100 but one number i
 
 ## Exit:
  `> .exit`
+
+
+# Big O analysis:
+
+**O(N)**
+
+```
+const calculateMissing = module.exports = function(numArr) {
+  if (numArr.length < 99) throw new Error('Invalid input: array is too short');
+    // O(1)
+  if (numArr.length > 100) throw new Error('Invalid input: array is too long');
+    // O(1)
+  const sum = numArr.reduce((a, b) => { return a + b });
+    // O(N)
+  if (isNaN(sum) || numArr.includes(null)) throw new Error('Invalid input: array must only contain numbers');
+    // O(N)
+  return 5050 - sum;
+    // O(1)
+};
+```
