@@ -9,8 +9,35 @@ Given [25, nxt]->[01, nxt]->[15, nxt]->[33, nxt]->[04, nxt]
 Return [15, nxt]
 ```
 
+### Solution:
 
-## Demo:
+#### Big O:
+*time:* O(n)
+*space:* O(1)
+
+```js
+'use strict';
+
+const findCenter = function(sll) {
+  if (!sll || !sll.hasOwnProperty('head')) throw new Error(`ERR: invalid input: ${sll}`);
+  if (!sll.head) return null;
+
+  let endNode = sll.head;
+  let centerNode = sll.head;
+  let count = 1;
+
+  while (endNode.next !== null) {
+    endNode = endNode.next;
+    count++;
+    if (count !== 1 && count % 2 !== 0) centerNode = centerNode.next;
+  }
+  return centerNode;
+};
+
+module.exports = findCenter;
+```
+
+### Demo:
 
 ```sh
 $ node
@@ -26,14 +53,14 @@ $ node
 // { value: 5, next: { value: 7, next: { value: 9, next: null } } }
 ```
 
-## Tests: jest
+### Tests: jest
 
 ```sh
 $ npm test
 // 100% coverage
 ```
 
-## Linter: eslint
+### Linter: eslint
 
 ```sh
 $ npm run linter
