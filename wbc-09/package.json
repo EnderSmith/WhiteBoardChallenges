@@ -1,20 +1,34 @@
 {
-  "name": "wbc-09",
+  "name": "whiteboard-challenge-05",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "test": "jest",
-    "start:debug": "DEBUG nFromEnd nodemon index.js",
-    "start:debug-win": "set DEBUG nFromEnd & nodemon index.js"
+    "test": "jest -i",
+    "linter": "eslint ./lib ./__test ./index.js"
   },
-  "author": "",
+  "jest": {
+    "setupFiles": [
+    ],
+    "verbose": true,
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage",
+    "coveragePathIgnorePatterns": [
+      "/__test__/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "author": "EnderSmith",
   "license": "ISC",
   "devDependencies": {
-    "debug": "^3.1.0",
     "eslint": "^4.16.0",
     "jest": "^22.1.4"
   }

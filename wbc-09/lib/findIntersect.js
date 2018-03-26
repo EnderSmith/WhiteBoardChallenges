@@ -1,22 +1,3 @@
-## Whiteboard Challenge 05
-
-### Problem Domain:
-
-*Write a function that accepts the `head` of two linked list as it's two arguments, and return the intersection of those two linked lists.*
-```
-Given [25, nxt]->[01, nxt]->[15, nxt]->[33, nxt]->[04, nxt]
-      [44, nxt]->[75, nxt]---^
-Return [15, nxt]
-```
-
-### Solution:
-
-#### Big O:
-*time:* O(n)
-*space:* O(1) - O(n)
-
-#### findCenter.js
-```js
 'use strict';
 
 const SLL = require('./sll');
@@ -68,35 +49,3 @@ const findIntersect = function(sllHeadOne, sllHeadTwo) {
 };
 
 module.exports = findIntersect;
-```
-
-### Demo:
-
-```sh
-$ node
-
-> const index = require(`./index`);
-
-> intersectMain = new index.Mk().intersectMain;
-// generates premade singly linked list mock that intersects other intersect mocks
-
-> intersectSameLength = new index.Mk().intersectSameLength;
-// generates premade singly linked list mock that intersects other intersect mocks
-
-> index.findintersect(intersectMain, intersectSameLength);
-// returns intersecting node
-// { value: 7, next: { value: 6, next: null } }
-```
-
-### Tests: jest
-
-```sh
-$ npm test
-// 100% coverage
-```
-
-### Linter: eslint
-
-```sh
-$ npm run linter
-```
