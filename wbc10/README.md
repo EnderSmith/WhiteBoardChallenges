@@ -46,6 +46,12 @@ const checkBraces = function(string) {
 
 module.exports = checkBraces;
 ```
+
+
+#### Big O:
+*time:* O(logn)
+*space:* O(1)
+
 ### binary-array-search.js
 ```js
 'use strict';
