@@ -2,72 +2,47 @@
 
 ### Problem Domain:
 
-*Write a function that accepts the `head` of two linked list as it's two arguments, and return the intersection of those two linked lists.*
+*Write a function which accepts `n` and a linked list as it's arguments, and will return the nth from last node in a linked list*
 ```
-Given [25, nxt]->[01, nxt]->[15, nxt]->[33, nxt]->[04, nxt]
-      [44, nxt]->[75, nxt]---^
-Return [15, nxt]
+Given n: 3, sll: [25, nxt]->[01, nxt]->[15, nxt]->[33, nxt]->[04, nxt]
+Return [01, nxt]
 ```
 
 ### Solution:
 
 #### Big O:
 *time:* O(n)
-*space:* O(1) - O(n)
+*space:* O(1)
 
-#### findCenter.js
+#### findNthNodeFromEnd.js
 ```js
 'use strict';
 
 const SLL = require('./sll');
 
-const findIntersect = function(sllHeadOne, sllHeadTwo) {
-  // O(1)
-  const invalidInput = !sllHeadOne || !sllHeadTwo ? true
-    : !sllHeadOne.hasOwnProperty('next') || !sllHeadTwo.hasOwnProperty('next') ? true
-      : !sllHeadOne.hasOwnProperty('value') || !sllHeadTwo.hasOwnProperty('value') ? true
-        : false;
-  if (invalidInput) throw new Error(`Error: Invalid input: ${sllHeadOne} , ${sllHeadTwo}`);
+const findNthNodeFromEnd = function (n, sll) {
+  if (isNaN(n)) throw new Error(`Error: Invalid input: ${n}`);
+  if (!sll || !sll.hasOwnProperty('head')) throw new Error(`ERR: invalid input: ${sll}`);
 
-  // O(1)
-  if (sllHeadOne === sllHeadTwo) return sllHeadOne;
+  if (n < 0) return null;
 
-  // O(n)
-  const reversedOne = new SLL();
-  const reversedTwo = new SLL();
-  // O(1)
-  reversedOne.head = sllHeadOne;
-  reversedTwo.head = sllHeadTwo;
-  // O(n)
-  reversedOne.reverse();
-  reversedTwo.reverse();
-
-  // O(1)
-  if (reversedOne.head.value !== reversedTwo.head.value) return null;
-  // O(1)
-  let current = {
-    one: reversedOne.head,
-    two: reversedTwo.head,
-  };
-  // O(1)
-  let intersection = reversedOne.head;
-
-  // O(n)
-  while (current.one.next && current.two.next && current.one.next.value === current.two.next.value) {
-    current.one = current.one.next;
-    current.two = current.two.next;
-    intersection = current.one;
+  let nMarker = sll.head;
+  let nthNodeFromEnd = sll.head;
+  while (n > 0) {
+    if (nMarker.next === null) return null;
+    nMarker = nMarker.next;
+    n--;
   }
 
-  // O(n)
-  reversedOne.reverse();
-  reversedTwo.reverse();
+  while (nMarker.next) {
+    nMarker = nMarker.next;
+    nthNodeFromEnd = nthNodeFromEnd.next
+  }
 
-  // O(1)
-  return intersection;
-};
+  return nthNodeFromEnd;
+}
 
-module.exports = findIntersect;
+module.exports = findNthNodeFromEnd;
 ```
 
 ### Demo:
@@ -77,15 +52,12 @@ $ node
 
 > const index = require(`./index`);
 
-> intersectMain = new index.Mk().intersectMain;
-// generates premade singly linked list mock that intersects other intersect mocks
+> const threeFromEnd = new index.Mk().threeFromEnd;
+// generates premade singly linked list with four nodes total
 
-> intersectSameLength = new index.Mk().intersectSameLength;
-// generates premade singly linked list mock that intersects other intersect mocks
-
-> index.findintersect(intersectMain, intersectSameLength);
-// returns intersecting node
-// { value: 7, next: { value: 6, next: null } }
+> index.findNthNodeFromEnd(2, threeFromEnd);
+// returns second node from end
+// { value: 1, next: { value: 2, next: { value: 3, next: null } } }
 ```
 
 ### Tests: jest
