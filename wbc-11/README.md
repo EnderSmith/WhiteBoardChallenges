@@ -1,44 +1,69 @@
-# WBC 11
+## Whiteboard Challenge 05
 
-_You have an integer array which contains numbers from 1 to 100 but one number is missing, you need to write a function calculateMissing = (array) => {...} to find that missing number in an array._
+### Problem Domain:
 
-## Setup:
- `$ node`
- `> const calculateMissing = new require('./lib/calculateMissing');`
-## Create an Array:
- `> myArr = [];`
+*Write a function called `dedupe(head)` that accepts the head of a linked list as it's argument, and returns a new linked list*
+    - Use a stack to identify any consecutive duplication, and remove them from the list.
 
- `> for (let i = 99; i >= 0; i--) myArr[i] = i + 1;`
+### Solution:
 
- `> myArr.splice(49, 1);`
+#### Big O:
+*time:* O(n)
+*space:* O(n)
 
- `   // creates an array with numbers 1 - 100, but skips 50`
+#### findNthNodeFromEnd.js
+```js
+'use strict';
 
-## Calculate missing values:
+const SLL = require('./sll');
+const Stack = require('./stack')
 
- `> calculateMissing(myArr);`
+const dedupe = function(head) {
+  if (head === null) return null;
+  if (!head.hasOwnProperty('value') || !head.hasOwnProperty('next')) throw (`Error: Invalid input: ${head}`);
+  const deduped = new SLL();
+  const stack = new Stack();
 
- `   // returns 50;`
+  let currentNode = head;
 
-## Exit:
- `> .exit`
+  deduped.insertEnd(currentNode.value);
+  stack.push(currentNode)
 
-
-# Big O analysis:
-
-**O(N)**
-
-```
-const calculateMissing = module.exports = function(numArr) {
-  if (numArr.length < 99) throw new Error('Invalid input: array is too short');
-    // O(1)
-  if (numArr.length > 100) throw new Error('Invalid input: array is too long');
-    // O(1)
-  const sum = numArr.reduce((a, b) => { return a + b });
-    // O(N)
-  if (isNaN(sum) || numArr.includes(null)) throw new Error('Invalid input: array must only contain numbers');
-    // O(N)
-  return 5050 - sum;
-    // O(1)
+  while (currentNode.next !== null) {
+    currentNode = currentNode.next;
+    if (stack.peek().value !== currentNode.value) deduped.insertEnd(currentNode.value);
+    stack.push(currentNode.value);
+  }
+  return deduped;
 };
+
+module.exports = dedupe;
+```
+
+### Demo:
+
+```sh
+$ node
+
+> const i = require(`./index`);
+
+> const sllWithDuplicates = new i.Mk().sllWithDuplicates;
+// { value: 0, next: { value: 1, next: { value: 1, next: { value: 2, next: { value: 3, next: { value: 3, next: null } } } } } }
+
+> i.dedupe(sllWithDuplicates);
+// returns { value: 0, next: { value: 1, next: { value: 2, next: { value: 3, next: null } } } }
+// (duplicates have been removed)
+```
+
+### Tests: jest
+
+```sh
+$ npm test
+// 100% coverage
+```
+
+### Linter: eslint
+
+```sh
+$ npm run linter
 ```

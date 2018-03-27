@@ -1,18 +1,13 @@
 'use strict';
 
-const instruction =
-`\nSetup:
- $ node
- > const calculateMissing = new require('./lib/calculateMissing');
-\nCreate an Array:
- > myArr = [];
- > for (let i = 99; i >= 0; i--) myArr[i] = i + 1;
- > myArr.splice(49, 1);
-    // creates an array with numbers 1 - 100, but skips 50
-\nCalculate missing values:
- > calculateMissing(myArr);
-    // returns 50;
-\nExit:
- > .exit\n`;
-
-console.log(instruction);
+module.exports = {
+  dedupe: require('./lib/dedupe'),
+  findNthNodeFromEnd: require('./lib/findNthNodeFromEnd'),
+  findIntersect: require('./lib/findIntersect'),
+  findCenter: require('./lib/findCenter'),
+  SLL: require('./lib/sll'),
+  Queue: require('./lib/queue'),
+  Stack: require('./lib/stack'),
+  Nd: require('./lib/nd'),
+  Mk: require('./__test__/lib/mocks/mock'),
+};
