@@ -11,7 +11,7 @@
 *time:* O(n)
 *space:* O(n)
 
-#### findNthNodeFromEnd.js
+#### dedupe.js
 ```js
 'use strict';
 

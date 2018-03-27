@@ -1,6 +1,6 @@
 'use strict';
 
-const SLL = require('./sll');
+const SLL = require('./lib/sll');
 
 const findIntersect = function(sllHeadOne, sllHeadTwo) {
   // O(1)

@@ -1,7 +1,7 @@
 'use strict';
 
-const SLL = require('./sll');
-const Stack = require('./stack');
+const SLL = require('./lib/sll');
+const Stack = require('./lib/stack');
 
 const dedupe = function(head) {
   if (head === null) return null;

@@ -10,7 +10,7 @@
 *time:* O(n)
 *space:* O(n)
 
-#### findNthNodeFromEnd.js
+#### findKTreeLeaves.js
 ```js
 'use strict';
 

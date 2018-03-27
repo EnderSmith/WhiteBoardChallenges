@@ -15,7 +15,7 @@ Return [15, nxt]
 *time:* O(n)
 *space:* O(1) - O(n)
 
-#### findCenter.js
+#### findIntersect.js
 ```js
 'use strict';
 
