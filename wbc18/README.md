@@ -10,25 +10,23 @@
 *time:* O(n)
 *space:* O(n)
 
-#### sumKTree.js
+#### findKTreeMaxChildren.js
 ```js
 'use strict';
 
 const KTree = require('../model/k-tree');
 
-const sumKTree = function(tree) {
-  if (!(tree instanceof KTree)) throw (`Error: Invalid input: ${tree}`);
+const findKTreeMaxChildren = function(tree) {
+  if (!tree || !(tree instanceof KTree)) throw new Error(`Error: Invlid input: ${tree}`);
   if (tree.root === null) return null;
-
-  let total = 0;
-
+  let maxChildren = 0;
   tree.breadthFirstSearch((currentNode) => {
-    total += currentNode.value.value;
+    if (currentNode.value.children.length > maxChildren) maxChildren = currentNode.value.children.length;
   });
-  return total;
+  return maxChildren;
 };
 
-module.exports = sumKTree;
+module.exports = findKTreeMaxChildren;
 ```
 
 ### Demo:
@@ -41,16 +39,16 @@ $ node
 > const kTree = new i.mock.KTree().threeLevelTree;
 // creates mockup of a k-tree
 
-> i.fn.sumKTree(kTree);
-// returns total sum:
-// 36
+> i.fn.findKTreeMaxChildren(kTree);
+// returns max number of children in any node:
+// 3
 ```
 
 ### Tests: jest
 
 ```sh
 $ npm test
-// 95.05% coverage
+// 95.59% coverage
 // (k-tree, tree-node constructors not covered)
 ```
 

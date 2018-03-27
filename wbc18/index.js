@@ -6,6 +6,7 @@ module.exports = {
     findCenter: require('./lib/findCenter'),
     findIntersect: require('./lib/findIntersect'),
     findKTreeLeaves: require('./lib/findKTreeLeaves'),
+    findKTreeMaxChildren: require('./lib/findKTreeMaxChildren'),
     findNthNodeFromEnd: require('./lib/findNthNodeFromEnd'),
     sumKTree: require('./lib/sumKTree'),
   },
