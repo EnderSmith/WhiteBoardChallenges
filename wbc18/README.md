@@ -1,8 +1,8 @@
-## Whiteboard Challenge 05
+## Whiteboard Challenge 18
 
 ### Problem Domain:
 
-*Write a function that accepts the root of a tree as it's argument, and returns an array of nodes, if any, which have no children.*
+*Write a function which will return the max child count of a node within a k-ary tree*
 
 ### Solution:
 
