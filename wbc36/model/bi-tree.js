@@ -1,0 +1,26 @@
+'use strict';
+
+class BinaryTree {
+  constructor(root=null) {
+    this.root = root;
+  }
+
+  inOrderTraversal_checkStructure() {
+    if (!this.root) return null;
+    return this._inOrderTraversal_checkStructure(this.root, []);
+  }
+
+  _inOrderTraversal_checkStructure(root, resultArray) {
+    if (root === null) return null;
+
+    let leftResult = this._inOrderTraversal_checkStructure(root.left, resultArray);
+    if (leftResult !== null) resultArray.push('left');
+    resultArray.push('root');
+    let rightResult = this._inOrderTraversal_checkStructure(root.right, resultArray);
+    if (rightResult !== null) resultArray.push('right');
+
+    return resultArray;
+  }
+};
+
+module.exports = BinaryTree;
