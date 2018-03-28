@@ -1,4 +1,4 @@
-## Whiteboard Challenge 18
+## Whiteboard Challenge 27
 
 ### Problem Domain:
 
@@ -14,44 +14,29 @@
 ```js
 'use strict';
 
-const map = function (inputArray, callback) {
-  if (!inputArray || !callback || typeof(callback) !== 'function') throw new Error(`Error: Invalid input: ${inputArray}, ${callback}`);
-  let index = 0;
-  let outputArray = [];
-  while(index < inputArray.length) {
-    outputArray.push(callback(inputArray[index]));
-    index++;
+const rotate2dArray = function(array2d) {
+  if (!array2d || !array2d.length || !array2d[0].length) throw new Error(`Error: Invalid input: ${array2d}`);
+  const startHeight = array2d.length;
+  // O(n)
+  const startWidth = array2d.reduce((prev, curr) => prev.length < curr.length ? curr : prev).length;
+  // O(1)
+  let startWidthIndex = 0;
+  let startHeightIndex = 0;
+  const outputArray2d = [];
+  // O(n)
+  while (startWidthIndex < startWidth) {
+    if (startHeightIndex === 0) outputArray2d[startWidthIndex] = [];
+
+    let startValue = array2d[startHeightIndex][startWidthIndex];
+    if (startValue !== undefined) outputArray2d[startWidthIndex][startHeight - startHeightIndex - 1] = startValue;
+
+    if (startHeightIndex === startHeight - 1) startWidthIndex++;
+    startHeightIndex = (startHeightIndex + 1) % startHeight;
   }
-  return outputArray;
+  return outputArray2d;
 };
 
-const filter = function (inputArray, callback) {
-  if (!inputArray || !callback || typeof(callback) !== 'function') throw new Error(`Error: Invalid input: ${inputArray}, ${callback}`);
-  let index = 0;
-  let outputArray = [];
-  while(index < inputArray.length) {
-    if (callback(inputArray[index])) outputArray.push(inputArray[index]);
-    index++;
-  }
-  return outputArray;
-};
-
-const reduce = function (inputArray, callback) {
-  if (!inputArray || !callback || typeof(callback) !== 'function') throw new Error(`Error: Invalid input: ${inputArray}, ${callback}`);
-  let index = 0;
-  let output = 0;
-  while(index < inputArray.length) {
-    output = callback(output || 0, inputArray[index]);
-    index++;
-  }
-  return output;
-};
-
-module.exports = {
-  map: map,
-  filter: filter,
-  reduce: reduce,
-};
+module.exports = rotate2dArray;
 ```
 
 ### Demo:
@@ -59,16 +44,25 @@ module.exports = {
 ```sh
 $ node
 
-> const u = require(`./index`).utils;
+> const rotate = require(`./index`).rotate2dArray;
 
-> u.map([1,2,3], current => current + 1)
-//returns [2,3,4]
+> const a = [[0,1,2],[3,4,5,6],[7,8,9]];
+// [
+//   [ 0, 1, 2 ],
+//   [ 3, 4, 5, 6 ],
+//   [ 7, 8, 9 ],
+// ]
 
-> u.filter([1,2,3], current => current > 1)
-// returns [2,3]
+> const a_rotated = rotate(a);
+// [
+//   [ 7, 3, 0 ],
+//   [ 8, 4, 1 ],
+//   [ 9, 5, 2 ],
+//   [ *, 6]
+// ]
+//
+// * === undefined
 
-> u.reduce([1,2,3], (previous, current) => previous + current);
-// returns 6
 
 ```
 
