@@ -1,4 +1,4 @@
-## Whiteboard Challenge 31
+## Whiteboard Challenge 32
 
 ### Problem Domain:
 
@@ -12,30 +12,38 @@ generates a Fibonacci sequence result given a Fibonacci sequence recursively
 
 ### Solution:
 
-#### Big O:
-*time:* O(n)
-*space:* O(n)
+#### Recursive vs Iterative
+To find the nth fibonacci number iteratively calls one calculation per n -- O(n). Whereas the recursive method calls itself twice per value of n, and each subsequent call calls itself twice per n -- O(n!). This is incredibly innefficient for space and time.
 
-#### utils.js
+#### fibonacci.js
 ```js
 'use strict';
 
-const findArrayIntersect = function(arrayA, arrayB) {
-  if(!arrayA || !arrayB || !Array.isArray(arrayA) || !Array.isArray(arrayB)) throw new Error(`Error: Invalid input: ${arrayA}, ${arrayB}`);
-  // O(n^2) [bad]
-  const intersectionArray = [];
-  for (let indexA = 0; indexA < arrayA.length; indexA++) {
-    for (let indexB = 0; indexB < arrayB.length; indexB++) {
-      if (arrayA[indexA] === arrayB[indexB]) {
-        if (!intersectionArray.includes(arrayA[indexA])) intersectionArray.push(arrayA[indexA]);
-        break;
-      }
-    }
-  }
-  return intersectionArray;
-};
+const fibonacci = {
+  iterative: function(n) {
+    if (n === 0 || n === 1) return n;
+    if (!n || typeof n !== 'number') throw new Error(`Error: Invalid input: ${n}`);
+    if (n < 0 || !Number.isInteger(n)) throw new Error(`Error: Invalid input: ${n}`);
 
-module.exports = findArrayIntersect;
+    const fibonacciArray = [0, 1];
+
+    for (let index = 0; index < (n-1); index++) {
+      fibonacciArray.push(fibonacciArray[fibonacciArray.length-1] + fibonacciArray[(fibonacciArray.length) - 2]);
+    }
+
+    return fibonacciArray.pop();
+  },
+  recursive: function(n) {
+    if (n === 0 || n === 1) return n;
+    if (!n || typeof n !== 'number') throw new Error(`Error: Invalid input: ${n}`);
+    if (n < 0 || !Number.isInteger(n)) throw new Error(`Error: Invalid input: ${n}`);
+
+    return this.recursive(n - 1) + this.recursive(n - 2);
+  }
+}
+
+module.exports = fibonacci;
+
 ```
 
 ### Demo:
@@ -43,11 +51,13 @@ module.exports = findArrayIntersect;
 ```sh
 $ node
 
-> const findArrayIntersect = require(`./index`).findArrayIntersect;
+> const f = require(`./index`).fibonacci;
 
-> const w = findArrayIntersect([3,2,1], [1,2,5])
-// => [1,2]
+> const w = f.recursive[4]
+// => 3
 
+> const w = f.iterative[4]
+// => 3
 ```
 
 ### Tests: jest

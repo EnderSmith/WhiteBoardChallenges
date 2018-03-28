@@ -20,7 +20,7 @@ const fibonacci = {
     if (n < 0 || !Number.isInteger(n)) throw new Error(`Error: Invalid input: ${n}`);
 
     return this.recursive(n - 1) + this.recursive(n - 2);
-  }
-}
+  },
+};
 
 module.exports = fibonacci;
